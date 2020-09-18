@@ -35,8 +35,8 @@ const int motorsteps = 200; // 200 Schrittmotor, 16 Servo
 const int gear_ratio = 1; // >0 entspricht Untersetzung
 
 const int M_LR_microstepping = 1; // TMC 2209 16 = Standard ohne Jumper
-const int M_LR_MaxSpeed = 20;
-const int M_LR_Acceleration = 10;
+const int M_LR_MaxSpeed = 40;
+const int M_LR_Acceleration = 50;
 int MotorSpeed = M_LR_MaxSpeed; // Umdrehungen, speed steps/s,
 int MotorAcceleration = M_LR_Acceleration; // acceleration mm/s^2
 
@@ -46,7 +46,7 @@ int ColorTimeSeconds_L = 0;
 int ColorTimeSeconds_R = 0;
 int ColorTimeSeconds_shift = 0;
 
-const int Anzahl_Schaufeln = 3;
+const float Anzahl_Schaufeln = 1.8;
 
 // Metronome Color Intervals
 Chrono Chrono_ColorTimeSeconds_L;
@@ -100,6 +100,8 @@ void Schrittmotor_L(int Umdrehungen, int Speed, int Acceleration)
   M_L.setMaxSpeed(Speed); // stp/s
   M_L.setAcceleration(Acceleration); // stp/s^2
 
+
+
   M_L.setTargetRel(Umdrehungen * gear_ratio * motorsteps * M_LR_microstepping); // 1600 = 1 REV with TMC2209
   StepController.moveAsync(M_L);
 
@@ -136,7 +138,7 @@ void Schrittmotor_R(int Umdrehungen, int Speed, int Acceleration)
 }
 
 
-void Farbmischer_GibFarbe(int GibSchaufeln_L, int GibSchaufeln_R)
+void Farbmischer_GibFarbe(int GibSchaufeln_R, int GibSchaufeln_L)
 {
   Schrittmotor_L_aktiv(true);
   M_L.setMaxSpeed(M_LR_MaxSpeed); // stp/s
@@ -146,8 +148,18 @@ void Farbmischer_GibFarbe(int GibSchaufeln_L, int GibSchaufeln_R)
   M_R.setMaxSpeed(M_LR_MaxSpeed); // stp/s
   M_R.setAcceleration(M_LR_Acceleration); // stp/s^2
 
-  M_L.setTargetRel(-GibSchaufeln_L * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
-  M_R.setTargetRel(-GibSchaufeln_R * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
+  int Drehrichtung = random(0, 10);
+  if (Drehrichtung < 2)
+  {
+    Drehrichtung = 1;
+  }
+  else
+  {
+    Drehrichtung = -1;
+  }
+
+  M_L.setTargetRel(Drehrichtung * GibSchaufeln_L * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
+  M_R.setTargetRel(Drehrichtung * GibSchaufeln_R * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
 
   StepController.moveAsync(M_L, M_R);
 }
@@ -159,12 +171,12 @@ void Stepper_loopMetronomeColor()
     // Einmalig Color shift
     if ((ColorTimeSeconds_shift > 0) and (ColorTimeSeconds_R > 0))
     {
-      Chrono_ColorTimeSeconds_R.add(ColorTimeSeconds_shift*1000);
+      Chrono_ColorTimeSeconds_R.add(ColorTimeSeconds_shift * 1000);
       ColorTimeSeconds_shift = 0;
     }
-    
+
     // Intervall passed Farbe L
-    if ( Chrono_ColorTimeSeconds_L.hasPassed(ColorTimeSeconds_L*1000) )
+    if ( Chrono_ColorTimeSeconds_L.hasPassed(ColorTimeSeconds_L * 1000) )
     {
       Chrono_ColorTimeSeconds_L.restart();
       TM1637_actionHappend_1111(); // Anzeigen was passiert ist
@@ -172,7 +184,7 @@ void Stepper_loopMetronomeColor()
       Farbmischer_GibFarbe(1, 0);
     }
     // Intervall passed Farbe R
-    if ( Chrono_ColorTimeSeconds_R.hasPassed(ColorTimeSeconds_R*1000) )
+    if ( Chrono_ColorTimeSeconds_R.hasPassed(ColorTimeSeconds_R * 1000) )
     {
       Chrono_ColorTimeSeconds_R.restart();
       TM1637_actionHappend_8888(); // Anzeigen was passiert ist
