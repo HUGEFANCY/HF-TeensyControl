@@ -112,6 +112,26 @@ void TM1637_actionHappend_1111()
 }
 
 
+void TM1637_actionHappend_2222()
+{
+    TM1637_TempExtruderZone_1.showNumberDec(2222, false);
+    TM1637_TempExtruderZone_2.showNumberDec(2222, false);
+    TM1637_TempWatercoolingWarm.showNumberDec(2222, false);
+    TM1637_TempWatercoolingCold.showNumberDec(2222, false); 
+    TM1637_pwmValuePartCoolingFan.showNumberDec(2222, false);
+    TM1637_prozentTankladung.showNumberDec(2222, false);
+}
+
+void TM1637_actionHappend_3333()
+{
+    TM1637_TempExtruderZone_1.showNumberDec(3333, false);
+    TM1637_TempExtruderZone_2.showNumberDec(3333, false);
+    TM1637_TempWatercoolingWarm.showNumberDec(3333, false);
+    TM1637_TempWatercoolingCold.showNumberDec(3333, false); 
+    TM1637_pwmValuePartCoolingFan.showNumberDec(3333, false);
+    TM1637_prozentTankladung.showNumberDec(3333, false);
+}
+
 /*
 void TM1637_actionHappend_L()
 {
@@ -170,6 +190,7 @@ void Blink_TempZone_1()
       changeBlink_ActiveStatus = false;
     }
   }
+
 }
 
 void Blink_TempZone_2()

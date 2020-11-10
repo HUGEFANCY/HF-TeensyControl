@@ -157,6 +157,19 @@ void Farbmischer_GibFarbe(int GibSchaufeln_R, int GibSchaufeln_L)
   {
     Drehrichtung = -1;
   }
+  if ((GibSchaufeln_R != 0) and (GibSchaufeln_L != 0))
+  {
+    TM1637_actionHappend_3333(); // Anzeigen was passiert ist
+  }
+  else if (GibSchaufeln_L != 0)
+  {
+    TM1637_actionHappend_2222(); // Anzeigen was passiert ist
+  }
+  else if (GibSchaufeln_R != 0)
+  {
+    TM1637_actionHappend_1111(); // Anzeigen was passiert ist
+  }
+
 
   M_L.setTargetRel(Drehrichtung * GibSchaufeln_L * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
   M_R.setTargetRel(Drehrichtung * GibSchaufeln_R * motorsteps * gear_ratio * M_LR_microstepping / Anzahl_Schaufeln);
@@ -179,7 +192,6 @@ void Stepper_loopMetronomeColor()
     if ( Chrono_ColorTimeSeconds_L.hasPassed(ColorTimeSeconds_L * 1000) )
     {
       Chrono_ColorTimeSeconds_L.restart();
-      TM1637_actionHappend_1111(); // Anzeigen was passiert ist
       // Motor L
       Farbmischer_GibFarbe(1, 0);
     }
@@ -187,7 +199,6 @@ void Stepper_loopMetronomeColor()
     if ( Chrono_ColorTimeSeconds_R.hasPassed(ColorTimeSeconds_R * 1000) )
     {
       Chrono_ColorTimeSeconds_R.restart();
-      TM1637_actionHappend_8888(); // Anzeigen was passiert ist
       // Motor R
       Farbmischer_GibFarbe(0, 1);
     }

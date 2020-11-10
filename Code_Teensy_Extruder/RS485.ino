@@ -144,12 +144,12 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               
               if (Schaufeln_L != 0)
               {
-                TM1637_actionHappend_8888(); // Anzeigen was passiert ist
+
                 Farbmischer_GibFarbe(1, 0);
               }
               if (Schaufeln_R != 0)
               {
-                TM1637_actionHappend_1111(); // Anzeigen was passiert ist
+               
                 Farbmischer_GibFarbe(0, 1);
               }
             }
@@ -162,8 +162,11 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               // Byte 3 ColorTime255_shift
               // Byte 4 Checksum
               ColorTimeSeconds_L = map(bufferRS485[1], 0, 255, 0, 600);
-              ColorTimeSeconds_R = map(bufferRS485[1], 0, 255, 0, 600);
-              ColorTimeSeconds_shift = map(bufferRS485[1], 0, 255, 0, 600);
+              ColorTimeSeconds_R = map(bufferRS485[2], 0, 255, 0, 600);
+              ColorTimeSeconds_shift = map(bufferRS485[3], 0, 255, 0, 600);
+              Serial.print("ColorTimeSeconds_L = ");Serial.println(ColorTimeSeconds_L);
+              Serial.print("ColorTimeSeconds_R = ");Serial.println(ColorTimeSeconds_R);
+              Serial.print("ColorTimeSeconds_shift = ");Serial.println(ColorTimeSeconds_shift);
 
               // LINKS
               if ((ColorTimeSeconds_L != 0))
@@ -195,7 +198,7 @@ void RS485_Extruder_CheckIfUpdateAvalible()
                 Chrono_MetronomeColorStop_R();
               }
 
-              TM1637_actionHappend_8888(); // Anzeigen was passiert ist
+              //TM1637_actionHappend_8888(); // Anzeigen was passiert ist
             }
           }
           // restart header flag
