@@ -13,10 +13,11 @@
 #define WIRE2_PINS   I2C_PINS_3_4  // defines SCL2 and SDA2 pins of teensy 3.5
 #define ANSWERSIZE 2  // only this amount of bytes is exchanged between Marlin and this Teensy 
 
-const uint8_t temp_header = 11;
-const uint8_t fan_header = 12;
-const uint8_t col_onetime_header = 13;
-const uint8_t col_periodisch_header = 14;
+const uint8_t temp_header = 11;  //Send target temperature
+const uint8_t fan_header = 12;  //Send target fanspeed
+const uint8_t col_onetime_header = 13;  //Send single color-command
+const uint8_t col_periodic_header = 14;  //Start or set periodic color-mixing
+
 // const byte counter_max = 3; // TODO-robin: make all i2c functions send the same amount of bytes 
 
 void I2C_Marlin_setup()
@@ -82,7 +83,7 @@ void receiveEvent()
         Serial.print("color clicks set:  "); Serial.println(col_click_value[0] + col_click_value[1]);
       }
     }
-    else if (i2c_header == col_periodisch_header)
+    else if (i2c_header == col_periodic_header)
     {
       byte x = Wire2.read();
 
