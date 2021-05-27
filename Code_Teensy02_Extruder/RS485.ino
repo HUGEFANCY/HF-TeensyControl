@@ -121,7 +121,7 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               // Byte 4 Checksum
 
               TargetTempExtruderMarlin = bufferRS485[1] + bufferRS485[2]; // gesendete 8 Bit Werte wiedeer auf die ursprünglichen 9 Bit zurückführen
-              Serial.print("Empfange Statusupdate vom Switchcabinet: TargetTempExtruderMarlin = "); Serial.println(TargetTempExtruderMarlin);
+              Serial.print("Receiving from Switchcabinet: TargetTempExtruderMarlin = "); Serial.println(TargetTempExtruderMarlin);
               PwmValuePartCoolingFanMarlin = bufferRS485[3];
               CoolingPWM(); // Kühlung aktuallisieren
 
@@ -135,22 +135,22 @@ void RS485_Extruder_CheckIfUpdateAvalible()
             else if (bufferRS485[0] == header_AbsenderSwitchcabinet_clickColor)
             {
               // Byte 0 Header
-              // Byte 1 Schaufeln Links
-              // Byte 2 Schaufeln Rechts
+              // Byte 1 ColShovel Left
+              // Byte 2 ColShovel Right
               // Byte 3 N/A
               // Byte 4 Checksum
-              byte Schaufeln_L = bufferRS485[1];
-              byte Schaufeln_R = bufferRS485[2];
+              byte ColShovel_L = bufferRS485[1];
+              byte ColShovel_R = bufferRS485[2];
               
-              if (Schaufeln_L != 0)
+              if (ColShovel_L != 0)
               {
 
-                Farbmischer_GibFarbe(1, 0);
+                ColorMixing_AddColor(1, 0);
               }
-              if (Schaufeln_R != 0)
+              if (ColShovel_R != 0)
               {
                
-                Farbmischer_GibFarbe(0, 1);
+                ColorMixing_AddColor(0, 1);
               }
             }
 
@@ -171,7 +171,7 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               // LINKS
               if ((ColorTimeSeconds_L != 0))
               {
-                FarbmischerMetronomeColor = true;
+                ColorMixingMetronomeColor = true;
                 Chrono_MetronomeColorRestart_L();
               }
               else
@@ -182,7 +182,7 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               // RECHTS
               if ((ColorTimeSeconds_R != 0))
               {
-                FarbmischerMetronomeColor = true;
+                ColorMixingMetronomeColor = true;
                 Chrono_MetronomeColorRestart_R();
               }
               else
@@ -193,12 +193,12 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               // alles stoppen
               if ((ColorTimeSeconds_L == 0) and (ColorTimeSeconds_R == 0))
               {
-                FarbmischerMetronomeColor = false;
+                ColorMixingMetronomeColor = false;
                 Chrono_MetronomeColorStop_L();
                 Chrono_MetronomeColorStop_R();
               }
 
-              //TM1637_actionHappend_8888(); // Anzeigen was passiert ist
+              //TM1637_actionHappend_8888(); // Show what happened
             }
           }
           // restart header flag

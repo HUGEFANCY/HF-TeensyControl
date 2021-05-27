@@ -71,11 +71,11 @@ void PrintCombTemps()
     Serial.print(AveragedRealTempZone_2);
     Serial.print(",");
 
-    //Serial.print(LuefterZone_1);
+    //Serial.print(HeatFanZone_1);
     //Serial.print(",");
     Serial.print(HeaterZone_1);
     Serial.print(",");
-    //Serial.print(LuefterZone_2);
+    //Serial.print(HeatFanZone_2);
     //Serial.print(",");
     Serial.print(HeaterZone_2);
     Serial.print(",");

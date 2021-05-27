@@ -1,14 +1,20 @@
+//Code that reads current temperatures from the two PT100 thermocouples located in the heating zones of the extrusion unit. 
+// reads both values from MAX31865 amplifier boards and averages them over the last n readouts.
+
+// connection guide: https://learn.adafruit.com/adafruit-max31865-rtd-pt100-amplifier/overview
 // MAX31865 https://www.adafruit.com/products/3328
 
 #include <Adafruit_MAX31865.h>
 #define debug
 
 // PINOUT
-// MAX31865 oben
+
+// MAX31865 + PT100 at HeatZone01 (top)
 const byte CS_pin_zone_1 = 20;
-// MAX31865 unten
+// MAX31865 + PT100 at HeatZone02 (bottom)
 const byte CS_pin_zone_2 = 17;
-// MAX31865 oben und unten
+
+// both MAX31865 boards share the following pins
 const byte SDI_pin = 16;
 const byte SDO_pin = 15;
 const byte CLK_pin = 14;
@@ -121,8 +127,7 @@ void PT100_MAX31865_loop()
       RealTemperatureZone_2 = round(thermo_zone_2.temperature(RNOMINAL, RREF));
 
 
-
-      // calculate average Temp over the last four messurements
+      // calculate average Temp over the last n (temp_cycle_number) measurements
       
       //AveragedRealTempZone_1 = thermo_zone_1.temperature(RNOMINAL, RREF);
       //AveragedRealTempZone_2 = thermo_zone_2.temperature(RNOMINAL, RREF);
@@ -149,7 +154,6 @@ void PT100_MAX31865_loop()
       {
         i = 0;
       }
-
 
     }
   }

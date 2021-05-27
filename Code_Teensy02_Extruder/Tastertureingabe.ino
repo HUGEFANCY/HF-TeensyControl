@@ -9,17 +9,17 @@ boolean SerialTastatur_CheckKeys()
 
     if (ch == '1') // Tastaturanschlag "1"
     {
-      Serial.println("Motor Links");
-      //Farbmischer_GibFarbe(1,0);
-      //Schrittmotor_L(1, MotorSpeed, MotorAcceleration); // Umdrehungen, speed steps/s, acceleration mm/s^2
+      Serial.println("Motor Left");
+      //ColorMixing_AddColor(1,0);
+      //Schrittmotor_L(1, MotorSpeed, MotorAcceleration); // Revolutions, speed steps/s, acceleration mm/s^2
       return true;
     }
 
     if (ch == '2') // Tastaturanschlag "2"
     {
-      Serial.println("Motor Rechts");
-      //Farbmischer_GibFarbe(0,1);
-      //Schrittmotor_R(1, MotorSpeed, MotorAcceleration); // Umdrehungen, speed steps/s, acceleration mm/s^2
+      Serial.println("Motor Right");
+      //ColorMixing_AddColor(0,1);
+      //Schrittmotor_R(1, MotorSpeed, MotorAcceleration); // Revolutions, speed steps/s, acceleration mm/s^2
       // Schrittmotor_nanotec(1, 80 * 64, 50 * 64);
       return true;
     }
@@ -63,15 +63,15 @@ boolean SerialTastatur_CheckKeys()
 
     if (ch == 'f') // Tastaturanschlag "f"
     {
-      //Farbmischer_GibFarbe(1, 1);
+      //ColorMixing_AddColor(1, 1);
     }
     if (ch == 'g') // Tastaturanschlag "f"
     {
-      //Farbmischer_GibFarbe(0, 1);
+      //ColorMixing_AddColor(0, 1);
     }
     if (ch == 'h') // Tastaturanschlag "f"
     {
-      //Farbmischer_GibFarbe(1, 0);
+      //ColorMixing_AddColor(1, 0);
     }
 
 

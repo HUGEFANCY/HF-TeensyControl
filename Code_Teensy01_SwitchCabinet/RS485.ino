@@ -180,17 +180,17 @@ void loop_RS485_Switchcabinet_Send_Statusupdate()
 
 
 
-void RS485_Switchcabinet_Send_clickColor(byte SchaufelnMotor_L, byte SchaufelnMotor_R)
+void RS485_Switchcabinet_Send_clickColor(byte ColShovelMotor_L, byte ColShovelMotor_R)
 {
   // Byte 0 Header (0x7D)
-  // Byte 1 Schaufeln Links
-  // Byte 2 Schaufeln Rechts
+  // Byte 1 ColShovel Left
+  // Byte 2 ColShovel Right
   // Byte 3 frei
   // Byte 4 Checksum
 
   bufferRS485[0] = header_AbsenderSwitchcabinet_clickColor;
-  bufferRS485[1] = SchaufelnMotor_L;
-  bufferRS485[2] = SchaufelnMotor_R;
+  bufferRS485[1] = ColShovelMotor_L;
+  bufferRS485[2] = ColShovelMotor_R;
   bufferRS485[3] = 0; // frei
   bufferRS485[4] = checksum();
 

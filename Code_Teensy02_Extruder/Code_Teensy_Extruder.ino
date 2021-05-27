@@ -3,7 +3,7 @@
 #include <Chrono.h>  // Include the Chrono library // https://github.com/SofaPirate/Chrono
 
 unsigned long currentMillis, startMillis = 0;
-int analog_resolution = 10; // sets resolution of analog writing as exponent of 2 (2^12=4096)
+int analog_resolution = 10; // sets resolution of analog writing as exponent of 2 (2^10=1024)
 
 
 // Extruder temperatures
@@ -17,7 +17,8 @@ int TempWatercooling_Out = 0; // max 9 Bit = 511°C
 
 byte ExtruderCoolingStatusMarlin = 0; // 0 = off, 1 = on // muss 8 Bit, statt boolean sein
 
-float prozentTankladung = 0;
+float percentageReservoir = 0;  // TODO: ask Chris/find out if this is actually in use or if the name is misleading
+
 void setup()
 {
   delay(200);
@@ -53,7 +54,6 @@ void loop()
   CombineRealTemps();
   Stepper_loopWatchdogDisableSteppers();
   Stepper_loopMetronomeColor();
-
 
 
   //watchdog_gameover();

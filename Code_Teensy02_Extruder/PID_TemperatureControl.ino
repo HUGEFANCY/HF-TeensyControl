@@ -1,10 +1,8 @@
 /*
- *
  * Code that is responsible for controling the hotend heat-bands with PID
  * 
  * PID Example: https://github.com/br3ttb/Arduino-PID-Library/blob/master/examples/PID_RelayOutput/PID_RelayOutput.ino
  * relevant Forum post: https://forum.arduino.cc/index.php?topic=142526.0 
- * 
  */
 
 /********************************************************
@@ -37,10 +35,10 @@ double HeatPowerZone_1 = 0;
 double HeatPowerZone_2 = 0;
 
 /// Hotend Bools
-//these are status bools  that do not affect the actual prcess but simply indicate a status.
-//Changing them here will not activate the relays
-int LuefterZone_1 = 0;
-int LuefterZone_2 = 0;
+// these are status bools  that do not affect the actual prcess but simply indicate a status.
+// Changing them here will not activate the relays
+int HeatFanZone_1 = 0;
+int HeatFanZone_2 = 0;
 int HeaterZone_1 = 0;
 int HeaterZone_2 = 0;
 
@@ -49,7 +47,9 @@ double Setpoint_Zone1, Input_Zone1, Output_Zone1; //Heating Zone 1
 double Setpoint_Zone2, Input_Zone2, Output_Zone2; //Heating Zone 2
 
 //Specify the links and initial tuning parameters 
-//TODO: find out if P_ON_M is needed (proportional on measurement) http://brettbeauregard.com/blog/2017/06/introducing-proportional-on-measurement/
+//TODO: find out if P_ON_M is needed (proportional on measurement) 
+//    http://brettbeauregard.com/blog/2017/06/introducing-proportional-on-measurement/
+
 //Heating Zone_1
 double Kp_Zone1=120, Ki_Zone1=0.3274, Kd_Zone1=150;
 PID myPID_Zone1(&Input_Zone1, &Output_Zone1, &Setpoint_Zone1, Kp_Zone1, Ki_Zone1, Kd_Zone1, 1, DIRECT);
@@ -58,7 +58,7 @@ PID myPID_Zone1(&Input_Zone1, &Output_Zone1, &Setpoint_Zone1, Kp_Zone1, Ki_Zone1
 double Kp_Zone2=120, Ki_Zone2=0.3274, Kd_Zone2=150;
 PID myPID_Zone2(&Input_Zone2, &Output_Zone2, &Setpoint_Zone2, Kp_Zone2, Ki_Zone1, Kd_Zone2, 1, DIRECT);
 
-int WindowSize = 4000;
+int WindowSize = 4000;  // the "time proportioning control" window
 unsigned long windowStartTime;
 double averageZ1,averageZ2;
 double OutputBufferZ1, OutputBufferZ2;
@@ -130,7 +130,7 @@ void PID_loop()
   { 
     RelayHeaterZone_1_SetStatus(true);
     //RelayCoolerZone_1_SetStatus(false) ;
-    LuefterZone_1 = 0;
+    HeatFanZone_1 = 0;
     HeaterZone_1 = 15;
     //Serial.print(15);
     //Serial.print(",");
@@ -140,7 +140,7 @@ void PID_loop()
   {
     RelayHeaterZone_1_SetStatus(false);
     //RelayCoolerZone_1_SetStatus(true) ;
-    LuefterZone_1 = 18;
+    HeatFanZone_1 = 18;
     HeaterZone_1 = 0;
     //Serial.print(0);
     //Serial.print(",");   
@@ -151,7 +151,7 @@ void PID_loop()
   { 
     RelayHeaterZone_2_SetStatus(true);
     //RelayCoolerZone_2_SetStatus(false) ;
-    LuefterZone_2 = 0;
+    HeatFanZone_2 = 0;
     HeaterZone_2 = 10;
     //Serial.print(10);
     //Serial.print(",");
@@ -160,7 +160,7 @@ void PID_loop()
   {
     RelayHeaterZone_2_SetStatus(false);
     //RelayCoolerZone_2_SetStatus(true) ;
-    LuefterZone_2 = 7;
+    HeatFanZone_2 = 7;
     HeaterZone_2 = 0;  
     //Serial.print(0);
     //Serial.print(",");       

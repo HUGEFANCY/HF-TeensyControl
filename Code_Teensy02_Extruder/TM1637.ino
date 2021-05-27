@@ -1,6 +1,5 @@
 //TODO: refactor this mess
 
-
 // TM1637 // 4 Digit LED Display to visualise Temperatures, etc.
 
 #include <TM1637Display.h>
@@ -43,9 +42,9 @@ const byte TM1637_pwmValuePartCoolingFan_DIO = 11;
 TM1637Display TM1637_pwmValuePartCoolingFan(TM1637_pwmValuePartCoolingFan_CLK, TM1637_pwmValuePartCoolingFan_DIO);
 
 // pwmValuePartCoolingFan // Weiß
-const byte TM1637_prozentTankladung_CLK = 12;
-const byte TM1637_prozentTankladung_DIO = 24;
-TM1637Display TM1637_prozentTankladung(TM1637_prozentTankladung_CLK, TM1637_prozentTankladung_DIO);
+const byte TM1637_percentageReservoir_CLK = 12;
+const byte TM1637_percentageReservoir_DIO = 24;
+TM1637Display TM1637_percentageReservoir(TM1637_percentageReservoir_CLK, TM1637_percentageReservoir_DIO);
 
 void TM1637_setup()
 {
@@ -59,8 +58,8 @@ void TM1637_setup()
   TM1637_TempWatercoolingCold.setBrightness(0x0f); // 7 max
   TM1637_pwmValuePartCoolingFan.clear();
   TM1637_pwmValuePartCoolingFan.setBrightness(0x0f); // 7 max
-  TM1637_prozentTankladung.clear();
-  TM1637_prozentTankladung.setBrightness(0x0f); // 7 max
+  TM1637_percentageReservoir.clear();
+  TM1637_percentageReservoir.setBrightness(0x0f); // 7 max
   delay(100);
 }
 
@@ -75,7 +74,7 @@ void TM1637_update()
     TM1637_TempWatercoolingCold.showNumberDec(TempWatercooling_Out, false); // ### TODO: hier später die momentane TempExtruderObenrum
     int PwmValuePartCoolingFanMarlin_prozent = map(PwmValuePartCoolingFanMarlin, 0, 255, 0, 100);
     TM1637_pwmValuePartCoolingFan.showNumberDec(PwmValuePartCoolingFanMarlin_prozent, false);
-    TM1637_prozentTankladung.showNumberDec(TargetTempExtruderMarlin, false);
+    TM1637_percentageReservoir.showNumberDec(TargetTempExtruderMarlin, false);
   }
 
 
@@ -101,7 +100,7 @@ void TM1637_actionHappend_8888()
     TM1637_TempWatercoolingWarm.showNumberDec(8888, false);
     TM1637_TempWatercoolingCold.showNumberDec(8888, false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec(8888, false);
-    TM1637_prozentTankladung.showNumberDec(8888, false);
+    TM1637_percentageReservoir.showNumberDec(8888, false);
 }
 
 void TM1637_actionHappend_1111()
@@ -111,7 +110,7 @@ void TM1637_actionHappend_1111()
     TM1637_TempWatercoolingWarm.showNumberDec(1111, false);
     TM1637_TempWatercoolingCold.showNumberDec(1111, false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec(1111, false);
-    TM1637_prozentTankladung.showNumberDec(1111, false);
+    TM1637_percentageReservoir.showNumberDec(1111, false);
 }
 
 
@@ -122,7 +121,7 @@ void TM1637_actionHappend_2222()
     TM1637_TempWatercoolingWarm.showNumberDec(2222, false);
     TM1637_TempWatercoolingCold.showNumberDec(2222, false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec(2222, false);
-    TM1637_prozentTankladung.showNumberDec(2222, false);
+    TM1637_percentageReservoir.showNumberDec(2222, false);
 }
 
 void TM1637_actionHappend_3333()
@@ -132,7 +131,7 @@ void TM1637_actionHappend_3333()
     TM1637_TempWatercoolingWarm.showNumberDec(3333, false);
     TM1637_TempWatercoolingCold.showNumberDec(3333, false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec(3333, false);
-    TM1637_prozentTankladung.showNumberDec(3333, false);
+    TM1637_percentageReservoir.showNumberDec(3333, false);
 }
 
 /*
@@ -143,7 +142,7 @@ void TM1637_actionHappend_L()
     TM1637_TempWatercoolingWarm.showNumberDec("LLLL", false);
     TM1637_TempWatercoolingCold.showNumberDec("LLLL", false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec("LLLL", false);
-    TM1637_prozentTankladung.showNumberDec("LLLL", false);
+    TM1637_percentageReservoir.showNumberDec("LLLL", false);
 }
 
 void TM1637_actionHappend_R()
@@ -153,7 +152,7 @@ void TM1637_actionHappend_R()
     TM1637_TempWatercoolingWarm.showNumberDec("RRRR", false);
     TM1637_TempWatercoolingCold.showNumberDec("RRRR", false); 
     TM1637_pwmValuePartCoolingFan.showNumberDec("RRRR", false);
-    TM1637_prozentTankladung.showNumberDec("RRRR", false);
+    TM1637_percentageReservoir.showNumberDec("RRRR", false);
 }
 */
 
