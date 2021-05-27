@@ -54,7 +54,7 @@ double Setpoint_Zone2, Input_Zone2, Output_Zone2; //Heating Zone 2
 double Kp_Zone1=120, Ki_Zone1=0.3274, Kd_Zone1=150;
 PID myPID_Zone1(&Input_Zone1, &Output_Zone1, &Setpoint_Zone1, Kp_Zone1, Ki_Zone1, Kd_Zone1, 1, DIRECT);
 
-//Heating Zon0
+//Heating Zone_2
 double Kp_Zone2=120, Ki_Zone2=0.3274, Kd_Zone2=150;
 PID myPID_Zone2(&Input_Zone2, &Output_Zone2, &Setpoint_Zone2, Kp_Zone2, Ki_Zone1, Kd_Zone2, 1, DIRECT);
 

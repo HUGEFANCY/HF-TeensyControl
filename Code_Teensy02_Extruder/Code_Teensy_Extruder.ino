@@ -38,17 +38,17 @@ void setup()
   PID_setup();
 
   startMillis = millis(); //start timer for periodic executions
-  Serial.println("Setup fertig");
+  Serial.println("Setup completed");
 }
 
 void loop()
 {
-  currentMillis = millis(); // Für das periodische Aufrufen von diversen Funktionen ohne ein delay zu verursachen
+  currentMillis = millis(); // used for the periodic execution of different functions
 
   RS485_Extruder_CheckIfUpdateAvalible();
   PT100_MAX31865_loop();
   TM1637_update();
-  TempWasser_loop();
+  TempWater_loop();
   PID_loop();
   CombineRealTemps();
   Stepper_loopWatchdogDisableSteppers();
@@ -65,7 +65,7 @@ void loop()
     //Serial.print("RealTemperatureZone_1 = ");Serial.println(TargetTemperatureZone_1);
     //Serial.print("RealTemperatureZone_2 = ");Serial.println(TargetTemperatureZone_2);
     //PrintCombTemps();
-    Serial.println("1000ms has passed");
+    Serial.println("1000ms have passed");
     startMillis = currentMillis;
     }
 }

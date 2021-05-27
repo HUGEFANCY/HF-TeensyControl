@@ -79,7 +79,7 @@ void receiveEvent()
       Serial.print("Color: "); Serial.println(col_click_value[counter - 1]);
       if (counter == 2)
       {
-        RS485_Schaltschrank_Send_clickColor(col_click_value[0], col_click_value[1]);
+        RS485_Switchcabinet_Send_clickColor(col_click_value[0], col_click_value[1]);
         Serial.print("color clicks set:  "); Serial.println(col_click_value[0] + col_click_value[1]);
       }
     }
@@ -95,7 +95,7 @@ void receiveEvent()
 
       if (counter == 3)
       {
-        RS485_Schaltschrank_Send_metronomeColor(col_metronome_value[0], col_metronome_value[1], col_metronome_value[2]); // (byte ColorTime255_L, byte ColorTime255_R, byte ColorTime255_shift)
+        RS485_Switchcabinet_Send_metronomeColor(col_metronome_value[0], col_metronome_value[1], col_metronome_value[2]); // (byte ColorTime255_L, byte ColorTime255_R, byte ColorTime255_shift)
       }
     }
     else
@@ -105,8 +105,8 @@ void receiveEvent()
     counter++;
   }
   Serial.print("- - - Bekommen von Marlin: target_temp_buffer = "); Serial.println(target_temp_buffer);
-  RGB_Blau();
-  RGB_Aus();
+  RGB_Blue();
+  RGB_Off();
 }
 
 
@@ -142,6 +142,6 @@ void requestEvent()
   */
   Wire2.write(response, sizeof(response)); //send value to Marlin vial i2c
   Serial.print("+ + + Gesendet zu Marlin: real_temp = "); Serial.println(real_temp);
-  RGB_Rot();
-  RGB_Aus();
+  RGB_Red();
+  RGB_Off();
 }

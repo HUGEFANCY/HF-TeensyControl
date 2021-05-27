@@ -1,3 +1,6 @@
+//TODO: refactor this mess
+
+
 // TM1637 // 4 Digit LED Display to visualise Temperatures, etc.
 
 #include <TM1637Display.h>
@@ -69,7 +72,7 @@ void TM1637_update()
     TM1637_TempExtruderZone_1.showNumberDec(RealTemperatureZone_1, false);
     TM1637_TempExtruderZone_2.showNumberDec(RealTemperatureZone_2, false);
     TM1637_TempWatercoolingWarm.showNumberDec(TempWatercooling_In, false);
-    TM1637_TempWatercoolingCold.showNumberDec(TempWatercooling_Out, false); // ### ToDo: hier später die momentane TempExtruderObenrum
+    TM1637_TempWatercoolingCold.showNumberDec(TempWatercooling_Out, false); // ### TODO: hier später die momentane TempExtruderObenrum
     int PwmValuePartCoolingFanMarlin_prozent = map(PwmValuePartCoolingFanMarlin, 0, 255, 0, 100);
     TM1637_pwmValuePartCoolingFan.showNumberDec(PwmValuePartCoolingFanMarlin_prozent, false);
     TM1637_prozentTankladung.showNumberDec(TargetTempExtruderMarlin, false);

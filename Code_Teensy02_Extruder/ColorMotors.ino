@@ -81,14 +81,14 @@ void Motoren_setup()
   //Chrono_ColorTimeSeconds_R.stop();
 }
 
-void Schrittmotor_L_aktiv(bool statusSetzen)
+void Schrittmotor_L_aktiv(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(M_L_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(M_L_EN, HIGH);
   }

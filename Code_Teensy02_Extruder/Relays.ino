@@ -9,7 +9,7 @@ const byte RelayCoolerZone_1_EN = 38;
 const byte RelayCoolerZone_2_EN = 39;
 
 const byte RelayWatercooling_EN = 21;
-const byte RelayLicht_EN = 22;
+const byte RelayLight_EN = 22;
 
 void Relays_setup()
 {
@@ -25,19 +25,19 @@ void Relays_setup()
 
   pinMode (RelayWatercooling_EN, OUTPUT);
   Relay_SetStatus(RelayWatercooling_EN, true);
-  pinMode (RelayLicht_EN, OUTPUT);
-  Relay_SetStatus(RelayLicht_EN, true);
+  pinMode (RelayLight_EN, OUTPUT);
+  Relay_SetStatus(RelayLight_EN, true);
   Relay_SetStatus(RelayWatercooling_EN, false);
 }
 
 void Relay_SetStatus(int ZoneRelay, bool status)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(ZoneRelay, HIGH);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(ZoneRelay, LOW);
     delay(10);
@@ -89,7 +89,7 @@ void Relays_clickCluck2()
   delay(100);
 
   // Licht
-  Relay_Setstatus(RelayLicht_EN, false);
+  Relay_Setstatus(RelayLight_EN, false);
   delay(200);
   Relay_Setstatus(RelayLicht, true);
   //delay(500);

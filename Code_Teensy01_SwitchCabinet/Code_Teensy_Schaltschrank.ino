@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 unsigned long currentMillis = 0;
-unsigned long RS485_gesendet_LastUpdatePreviousMillis = 0;
+unsigned long RS485_sent_LastUpdatePreviousMillis = 0;
 #include <Metro.h> // Include the Metro library // https://www.pjrc.com/teensy/td_libs_Metro.html
 
 // Global variables, TargetTemp from Marlin and RealTemp from Hotend
@@ -34,8 +34,8 @@ void setup()
 void loop()
 {
   SerialTastatur_CheckKeys();
-  loop_RS485_Schaltschrank_Send_Statusupdate();
-  RS485_Schaltschrank_CheckIfUpdateAvalible();
+  loop_RS485_Switchcabinet_Send_Statusupdate();
+  RS485_Switchcabinet_CheckIfUpdateAvalible();
   loop_FunkCheck();
   //watchdog_gameover();
 }

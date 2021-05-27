@@ -11,7 +11,7 @@ void setup()
   pinMode (PIN_G, OUTPUT);
   pinMode (PIN_B, OUTPUT);
   delay(10);
-  RGB_aus();
+  RGB_Off();
   delay(10);
   RGB_color(255, 0, 0);
   delay(1000);
@@ -19,11 +19,11 @@ void setup()
   delay(1000);
   RGB_color(0, 0, 255);
   delay(1000);
-  RGB_aus();
+  RGB_Off();
 
 }
 
-void RGB_aus()
+void RGB_Off()
 {
   analogWrite(PIN_R, 0);
   analogWrite(PIN_G, 0);

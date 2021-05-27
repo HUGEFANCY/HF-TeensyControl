@@ -10,13 +10,13 @@ void watchdog_gameover()
   {
     gameover_LastUpdatePreviousMillis = currentMillis; // save the last time of the event
 
-    // Gameover – Länger als 10 Sekunden nichts vom Teensy Schaltschrank gehört. Schalte alles ab.
+    // Gameover – Länger als 10 Sekunden nichts vom Teensy Switchcabinet gehört. Schalte alles ab.
     const int gameover = 10000;
     if (currentMillis - RS485_updateVariables_LastUpdatePreviousMillis >= gameover)
     {
       Serial.println("Gameover – RS485_updateVariables_LastUpdatePreviousMillis");
       /// ### ToDo -> Marlin stoppen, Notaus, Nothalt
-      // ### ToDo Marlin Nothalt aktivieren (ohne Teensy Schaltschrank)
+      // ### ToDo Marlin Nothalt aktivieren (ohne Teensy Switchcabinet)
     }
   }
 }

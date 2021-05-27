@@ -1,4 +1,4 @@
-// RS485 long distance communication betweent Teensy Schaltschrank (Master) and Teensy Extruder (Slave) über UART with selfmade Communication Protocol
+// RS485 long distance communication betweent Teensy Switchcabinet (Master) and Teensy Extruder (Slave) über UART with selfmade Communication Protocol
 // Tutorial RS485 UART: https://circuitdigest.com/microcontroller-projects/rs485-serial-communication-between-arduino-uno-and-arduino-nano
 // Tutorial designing a communication protocol: https://henryforceblog.wordpress.com/2015/03/12/designing-a-communication-protocol-using-arduinos-serial-library/
 // Modbus (not used) https://industruino.com/blog/our-news-1/post/modbus-rtu-master-and-slave-14
@@ -9,7 +9,7 @@
 // R0 -> Teensy Rx2
 // RE = DE -> Teensy PIN 13
 // DI -> Teensy Tx2
-// VCC -> 5VRS485_Schaltschrank_Send_clickColor
+// VCC -> 5VRS485_Switchcabinet_Send_clickColor
 // A -> Kabelterminal 17
 // B -> Kabelterminal 18
 // GND -> Teensy GND
@@ -28,9 +28,9 @@ uint8_t firstTimeHeader = 0; // Flag that helps us restart counter when we first
 
 // headers
 const uint8_t header_AbsenderExtruder_Statusupdate = 13;
-const uint8_t header_AbsenderSchaltschrank_Statusupdate = 14;
-const uint8_t header_AbsenderSchaltschrank_clickColor = 15;
-const uint8_t header_AbsenderSchaltschrank_metronomeColor = 16;
+const uint8_t header_AbsenderSwitchcabinet_Statusupdate = 14;
+const uint8_t header_AbsenderSwitchcabinet_clickColor = 15;
+const uint8_t header_AbsenderSwitchcabinet_metronomeColor = 16;
 
 void RS485_setup()
 {
@@ -83,7 +83,7 @@ uint8_t verifyChecksum(uint8_t originalResult)
 
 
 
-void RS485_Schaltschrank_CheckIfUpdateAvalible()
+void RS485_Switchcabinet_CheckIfUpdateAvalible()
 {
   int BreakCounter = 0;
   while (BreakCounter <= 2)
@@ -123,7 +123,7 @@ void RS485_Schaltschrank_CheckIfUpdateAvalible()
             //Serial.println("Header Update Tempertur found");
             if (bufferRS485[0] == header_AbsenderExtruder_Statusupdate)
             {
-              //Serial.println("Empfange Statusupdate Schaltschrank");
+              //Serial.println("Empfange Statusupdate Switchcabinet");
               // Byte 0 Header
               // Byte 1 CombinedRealTempExtruder Byte 01
               // Byte 2 CombinedRealTempExtruder Byte 02
@@ -147,12 +147,12 @@ void RS485_Schaltschrank_CheckIfUpdateAvalible()
 }
 
 
-void loop_RS485_Schaltschrank_Send_Statusupdate()
+void loop_RS485_Switchcabinet_Send_Statusupdate()
 {
   //Serial.println("checking if its time to send");
   if (sendeIntervall.check() == 1)  // check if the metro has passed its interval
   {
-    //Serial.println("Sende Statusupdate Schaltschrank");
+    //Serial.println("Sende Statusupdate Switchcabinet");
 
     // Byte 0 Header
     // Byte 1 TargetTempExtruderMarlin Byte 01
@@ -160,7 +160,7 @@ void loop_RS485_Schaltschrank_Send_Statusupdate()
     // Byte 3 pwmValuePartCoolingFanMarlin
     // Byte 4 Checksum
 
-    bufferRS485[0] = header_AbsenderSchaltschrank_Statusupdate;
+    bufferRS485[0] = header_AbsenderSwitchcabinet_Statusupdate;
     if (TargetTempExtruderMarlin <= 255)
     {
       bufferRS485[1] = TargetTempExtruderMarlin; // Value between 0-255°C
@@ -180,7 +180,7 @@ void loop_RS485_Schaltschrank_Send_Statusupdate()
 
 
 
-void RS485_Schaltschrank_Send_clickColor(byte SchaufelnMotor_L, byte SchaufelnMotor_R)
+void RS485_Switchcabinet_Send_clickColor(byte SchaufelnMotor_L, byte SchaufelnMotor_R)
 {
   // Byte 0 Header (0x7D)
   // Byte 1 Schaufeln Links
@@ -188,7 +188,7 @@ void RS485_Schaltschrank_Send_clickColor(byte SchaufelnMotor_L, byte SchaufelnMo
   // Byte 3 frei
   // Byte 4 Checksum
 
-  bufferRS485[0] = header_AbsenderSchaltschrank_clickColor;
+  bufferRS485[0] = header_AbsenderSwitchcabinet_clickColor;
   bufferRS485[1] = SchaufelnMotor_L;
   bufferRS485[2] = SchaufelnMotor_R;
   bufferRS485[3] = 0; // frei
@@ -197,7 +197,7 @@ void RS485_Schaltschrank_Send_clickColor(byte SchaufelnMotor_L, byte SchaufelnMo
   Serial2.write(bufferRS485, bufferSizeRS485); // We send all bytes stored in the buffer
 }
 
-void RS485_Schaltschrank_Send_metronomeColor(byte ColorTime255_L, byte ColorTime255_R, byte ColorTime255_shift)
+void RS485_Switchcabinet_Send_metronomeColor(byte ColorTime255_L, byte ColorTime255_R, byte ColorTime255_shift)
 {
   // Byte 0 Header
   // Byte 1 ColorTime255_L
@@ -205,7 +205,7 @@ void RS485_Schaltschrank_Send_metronomeColor(byte ColorTime255_L, byte ColorTime
   // Byte 3 ColorTime255_shift
   // Byte 4 Checksum
 
-  bufferRS485[0] = header_AbsenderSchaltschrank_metronomeColor;
+  bufferRS485[0] = header_AbsenderSwitchcabinet_metronomeColor;
   bufferRS485[1] = ColorTime255_L;
   bufferRS485[2] = ColorTime255_R;
   bufferRS485[3] = ColorTime255_shift;

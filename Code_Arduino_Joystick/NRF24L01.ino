@@ -16,7 +16,7 @@ RF24 radio(5, 6); // CE, CSN -> Arduino Pro Mini Board 5, 6
 RF24Network network(radio);
 
 const int FunkChannel = 90;
-const uint16_t FunkMasterSchaltschrank = 00; // Address of the other node in Octal format // Schaltschrank, Master
+const uint16_t FunkMasterSwitchcabinet = 00; // Address of the other node in Octal format // Switchcabinet, Master
 const uint16_t FunkSlaveJoystick = 01; // Joystick, Slave
 
 Metro Metro_FunkCheck = Metro(500);
@@ -72,7 +72,7 @@ void setup_Funk()
 boolean FunkData_Temp_PWM()
 {
   // Send data:
-  RF24NetworkHeader header(FunkMasterSchaltschrank);   // Address where the data is going
+  RF24NetworkHeader header(FunkMasterSwitchcabinet);   // Address where the data is going
   dataOutgoing.header = 1;
   //dataOutgoing.val1 = NewTargetTemp_Zone1;
   //dataOutgoing.val2 = NewTargetTemp_Zone2;
@@ -95,7 +95,7 @@ boolean FunkData_Temp_PWM()
 boolean FunkData_clickColor(int RadA, int RadB)
 {
   // Send data:
-  RF24NetworkHeader header(FunkMasterSchaltschrank);   // Address where the data is going
+  RF24NetworkHeader header(FunkMasterSwitchcabinet);   // Address where the data is going
   dataOutgoing.header = 2; // Farbrad
   dataOutgoing.val1 = RadA; // RAD A
   dataOutgoing.val2 = RadB; // RAD B
@@ -118,7 +118,7 @@ boolean FunkData_clickColor(int RadA, int RadB)
 boolean FunkData_colorMetronome()
 {
   // Send data:
-  RF24NetworkHeader header(FunkMasterSchaltschrank);   // Address where the data is going
+  RF24NetworkHeader header(FunkMasterSwitchcabinet);   // Address where the data is going
   dataOutgoing.header = 3; // Farbrad colorMetronome
   dataOutgoing.val1 = ColorTime255_L; // RAD L
   dataOutgoing.val2 = ColorTime255_R; // RAD R
@@ -145,12 +145,12 @@ void loop_FunkCheck()
 
   while (network.available()) // Is there any incoming data?
   {
-    RF24NetworkHeader header(FunkMasterSchaltschrank);
+    RF24NetworkHeader header(FunkMasterSwitchcabinet);
     network.read(header, &dataIncoming, sizeof(dataIncoming)); // Read the incoming data
 
-    if ((header.from_node == FunkMasterSchaltschrank) and (dataIncoming.header == 1))
+    if ((header.from_node == FunkMasterSwitchcabinet) and (dataIncoming.header == 1))
     {
-      //Serial.println("Schaltschrank hat was gefunkt");
+      //Serial.println("Switchcabinet hat was gefunkt");
 
       if ((dataIncoming.val1 != TargetTemperatureZone_1) and (NewTargetTempAvalible_Zone1 == false))
       {

@@ -20,56 +20,56 @@ void setup_relays()
 }
 
 
-void relay_heaterOben_setStatus(bool statusSetzen)
+void relay_heaterOben_setStatus(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(relay_heaterOben_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(relay_heaterOben_EN, HIGH);
     delay(10);
   }
 }
 
-void relay_heaterUnten_setStatus(bool statusSetzen)
+void relay_heaterUnten_setStatus(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(relay_heaterUnten_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(relay_heaterUnten_EN, HIGH);
     delay(10);
   }
 }
 
-void relay_coolerOben_setStatus(bool statusSetzen)
+void relay_coolerOben_setStatus(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(relay_coolerOben_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(relay_coolerOben_EN, HIGH);
     delay(10);
   }
 }
 
-void relay_coolerUnten_setStatus(bool statusSetzen)
+void relay_coolerUnten_setStatus(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(relay_coolerUnten_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(relay_coolerUnten_EN, HIGH);
     delay(10);

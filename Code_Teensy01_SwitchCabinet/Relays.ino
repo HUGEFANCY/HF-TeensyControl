@@ -17,42 +17,42 @@ void Relays_setup()
   RelayKompressor(false);
 }
 
-void RelayExit_1(bool statusSetzen)
+void RelayExit_1(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(RelayExit_1_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(RelayExit_1_EN, HIGH);
     delay(10);
   }
 }
 
-void RelayExit_2(bool statusSetzen)
+void RelayExit_2(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(RelayExit_2_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(RelayExit_2_EN, HIGH);
     delay(10);
   }
 }
 
-void RelayKompressor(bool statusSetzen)
+void RelayKompressor(bool setStatus)
 {
-  if (statusSetzen == true)
+  if (setStatus == true)
   {
     digitalWrite(RelayKompressor_EN, LOW);
     delay(10);
   }
-  else if (statusSetzen == false)
+  else if (setStatus == false)
   {
     digitalWrite(RelayKompressor_EN, HIGH);
     delay(10);

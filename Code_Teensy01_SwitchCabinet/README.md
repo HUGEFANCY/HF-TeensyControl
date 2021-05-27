@@ -4,7 +4,7 @@ These are the codes running on the Teenssy located in the switch cabinet
 This teensy talks to the Marlin Board (BTT SKR 1.3) via I2c and sends the info further to the Teensy on the Z-Axis via RS485. 
 There is also a watchdog that can kill the Marlin Board if necessary. 
 
-## Code_Teensy_Schaltschrank.ino
+## Code_Teensy_Switchcabinet.ino
 - Base code and loop that is running
 - imports all the other .ino files for execution. 
 

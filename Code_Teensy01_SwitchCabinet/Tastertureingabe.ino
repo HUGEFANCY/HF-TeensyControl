@@ -50,12 +50,12 @@ void SerialTastatur_CheckKeys()
     if ((charmodus == "click_color") and (ch == '1'))
     {
       Serial.println("1 x Color L");
-      RS485_Schaltschrank_Send_clickColor(1, 0);
+      RS485_Switchcabinet_Send_clickColor(1, 0);
     }
     if ((charmodus == "click_color") and (ch == '2'))
     {
       Serial.println("1 x Color R");
-      RS485_Schaltschrank_Send_clickColor(0, 1);
+      RS485_Switchcabinet_Send_clickColor(0, 1);
     }
   }
 }

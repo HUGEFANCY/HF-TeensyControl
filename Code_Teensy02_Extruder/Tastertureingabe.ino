@@ -1,3 +1,6 @@
+//TODO translate variable, comments and functions 
+
+
 boolean SerialTastatur_CheckKeys()
 {
   if (Serial.available())

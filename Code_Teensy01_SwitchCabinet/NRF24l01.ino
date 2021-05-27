@@ -17,7 +17,7 @@ RF24 radio(7, 8); // CE, CSN -> Teensy Board 7, 8 // SPI Channel 0 (ABER modefiz
 RF24Network network(radio);
 
 const int FunkChannel = 90;
-const uint16_t FunkMasterSchaltschrank = 00; // Address of the other node in Octal format // Schaltschrank, Master
+const uint16_t FunkMasterSwitchcabinet = 00; // Address of the other node in Octal format // Switchcabinet, Master
 const uint16_t FunkSlaveJoystick = 01; // Joystick, Slave
 
 // Datenkonstrukt Eingehend
@@ -58,7 +58,7 @@ void setup_Funk()
   SPI.setSCK(14); // changes SCK Pin Teensy
   SPI.begin();
   radio.begin();
-  network.begin(FunkChannel, FunkMasterSchaltschrank); //(channel, node address)
+  network.begin(FunkChannel, FunkMasterSwitchcabinet); //(channel, node address)
   radio.setPALevel(RF24_PA_MAX);
   radio.setDataRate(RF24_2MBPS);
   radio.setAutoAck(1); // Ensure autoACK is enabled
@@ -91,14 +91,14 @@ void loop_FunkCheck()
     {
       Serial.print("Farbauswurf Rad A = "); Serial.println(dataIncoming.val1);
       Serial.print("Farbauswurf Rad B = "); Serial.println(dataIncoming.val2);
-      RS485_Schaltschrank_Send_clickColor(dataIncoming.val1, dataIncoming.val2); // Rad 1, = (1 Farbauswurf = 1/3 Umdrehung)
+      RS485_Switchcabinet_Send_clickColor(dataIncoming.val1, dataIncoming.val2); // Rad 1, = (1 Farbauswurf = 1/3 Umdrehung)
     }
     if ((header.from_node == FunkSlaveJoystick) and (dataIncoming.header == 3)) // header 3 = MetronomeColor
     {
       Serial.print("ColorTime255_L = "); Serial.println(dataIncoming.val1);
       Serial.print("ColorTime255_R = "); Serial.println(dataIncoming.val2);
       Serial.print("ColorTime255_shift = "); Serial.println(dataIncoming.val3);
-      RS485_Schaltschrank_Send_metronomeColor(dataIncoming.val1, dataIncoming.val2, dataIncoming.val3); // Rad 1, = (1 Farbauswurf = 1/3 Umdrehung)
+      RS485_Switchcabinet_Send_metronomeColor(dataIncoming.val1, dataIncoming.val2, dataIncoming.val3); // Rad 1, = (1 Farbauswurf = 1/3 Umdrehung)
     }
   }
   FunkData_Temp(); // Anschließend senden wir mal was
