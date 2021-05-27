@@ -24,8 +24,8 @@ void setup()
   Serial.begin(9600);
   delay(100);
 
-  KuehlungPWM_setup();
-  KuehlungPWM();
+  CoolingPWM_setup();
+  CoolingPWM();
 
   analogReadResolution(analog_resolution);
 

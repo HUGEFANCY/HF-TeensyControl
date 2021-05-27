@@ -123,7 +123,7 @@ void RS485_Extruder_CheckIfUpdateAvalible()
               TargetTempExtruderMarlin = bufferRS485[1] + bufferRS485[2]; // gesendete 8 Bit Werte wiedeer auf die ursprünglichen 9 Bit zurückführen
               Serial.print("Empfange Statusupdate vom Switchcabinet: TargetTempExtruderMarlin = "); Serial.println(TargetTempExtruderMarlin);
               PwmValuePartCoolingFanMarlin = bufferRS485[3];
-              KuehlungPWM(); // Kühlung aktuallisieren
+              CoolingPWM(); // Kühlung aktuallisieren
 
               // Timeout Verbindung Switchcabinet – Extruder weggebrochen
               RS485_updateVariables_LastUpdatePreviousMillis = currentMillis; // für Timeout falls wir lange nichts mehr vom Teensy Switchcabinet gehört haben
